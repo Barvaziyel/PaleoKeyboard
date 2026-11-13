@@ -1,4 +1,4 @@
-package com.example.paleokeyboard
+package io.github.barvaziyel.paleokeyboard
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -27,14 +27,14 @@ private const val REPEAT_START_DELAY = 400L
 private const val REPEAT_FIRST_INTERVAL = 100L
 private const val REPEAT_FASTEST_INTERVAL = 40L
 
-class PhoenicianKeyboardService : InputMethodService() {
+class PaleoHebrewKeyboardService : InputMethodService() {
 
     private val handler = Handler(Looper.getMainLooper())
     private var keyboardView: View? = null
     private var isSymbols = false
     private var repeatInterval = REPEAT_FIRST_INTERVAL
 
-    private val phoenicianMap = mapOf(
+    private val lettersMap = mapOf(
         R.id.key_apostrophe to "'",
         R.id.key_dash to "-",
         R.id.key_qof to "𐤒",
@@ -104,7 +104,7 @@ class PhoenicianKeyboardService : InputMethodService() {
         R.id.key_dot to "."
     )
 
-    private val extraKeys = symbolsMap.keys - phoenicianMap.keys
+    private val extraKeys = symbolsMap.keys - lettersMap.keys
 
     private lateinit var prefs: SharedPreferences
 
@@ -218,7 +218,7 @@ class PhoenicianKeyboardService : InputMethodService() {
         view.key(R.id.key_globe).visibility = if (offerSwitching) View.VISIBLE else View.GONE
     }
 
-    private fun currentMap() = if (isSymbols) symbolsMap else phoenicianMap
+    private fun currentMap() = if (isSymbols) symbolsMap else lettersMap
 
     private fun spaceIsDivider() = KeyboardPrefs.spaceIsDivider(this)
 
@@ -332,7 +332,7 @@ class PhoenicianKeyboardService : InputMethodService() {
 }
 
 /**
- * True when the cursor is at the start of a line. Phoenician lines begin with an invisible
+ * True when the cursor is at the start of a line. Paleo-Hebrew lines begin with an invisible
  * [RLM] so that apps which judge direction by the first character show them right to left.
  * Null means the app won't say what's before the cursor, so no mark is added.
  */
@@ -341,7 +341,7 @@ internal fun startsLine(before: CharSequence?): Boolean =
 
 /**
  * How many chars of [before] (the text before the cursor) one backspace removes: the last
- * character you can see, whole (a Phoenician letter is two chars, an emoji can be many),
+ * character you can see, whole (a Paleo-Hebrew letter is two chars, an emoji can be many),
  * plus any invisible [RLM]s touching it, so every press visibly deletes something.
  */
 internal fun charsToDelete(before: CharSequence): Int {

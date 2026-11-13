@@ -1,4 +1,4 @@
-package com.example.paleokeyboard.ui.theme
+package io.github.barvaziyel.paleokeyboard.ui.theme
 
 import android.app.Activity
 import android.os.Build
