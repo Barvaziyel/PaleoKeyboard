@@ -21,3 +21,7 @@ There's no release yet, so build it yourself:
 3. Tap **Choose keyboard** and pick Phoenician Keyboard. The box underneath is there to try it.
 
 Needs Android 8.0 or newer. Android comes with a Phoenician font (Noto Sans Phoenician), so the letters show without installing anything. Someone you send Phoenician text to needs a Phoenician font to see it.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
