@@ -15,6 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <Button android:id="@+id/key_apostrophe" style="@style/KeyboardKey" android:text="'" />
@@ -33,6 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <Button android:id="@+id/key_shin" style="@style/KeyboardKey" android:text="𐤔" />
@@ -51,6 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <Button android:id="@+id/key_zayin" style="@style/KeyboardKey" android:text="𐤆" />
@@ -73,6 +76,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <Button

@@ -20,6 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import com.example.paleokeyboard.ui.theme.PaleoKeyboardTheme
 
@@ -96,6 +98,8 @@ fun SetupScreen() {
                 value = text,
                 onValueChange = { text = it },
                 label = { Text("Try it here") },
+                // Follow the text: Phoenician lines start on the right.
+                textStyle = LocalTextStyle.current.copy(textDirection = TextDirection.Content),
                 minLines = 3,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -140,9 +144,10 @@ private fun SpaceBarSetting() {
         },
     ) {
         Column(Modifier.weight(1f)) {
-            Text("Space bar types $WORD_DIVIDER", style = MaterialTheme.typography.titleMedium)
+            Text("Word divider on the space bar", style = MaterialTheme.typography.titleMedium)
             Text(
-                "The Phoenician word divider. Turn off for a normal space.",
+                "Space types $WORD_DIVIDER, the small dot Phoenician puts between words. " +
+                    "Turn off for a normal space.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
