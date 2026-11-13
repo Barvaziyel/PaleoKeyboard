@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A function key lightens to the letter-key shade while pressed. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/key_letter" android:state_pressed="true" />
+    <item android:color="@color/key_function" />
+</selector>

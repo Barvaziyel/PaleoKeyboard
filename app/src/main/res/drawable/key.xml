@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A rounded key. White here; the real (and pressed) color comes from backgroundTint. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="3dp"
+    android:insetTop="4dp"
+    android:insetRight="3dp"
+    android:insetBottom="4dp">
+    <shape android:shape="rectangle">
+        <corners android:radius="6dp" />
+        <solid android:color="@android:color/white" />
+    </shape>
+</inset>

@@ -1,69 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hebrew-style layout. PhoenicianKeyboardService swaps the labels for the symbols page,
+     which also shows the key_extra keys. Always left to right: a phone set to Hebrew
+     would otherwise mirror every row. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp">
+    android:background="@color/keyboard_background"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:paddingHorizontal="3dp"
+    android:paddingTop="4dp">
 
     <!-- Row 1 -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/key_apostrophe" android:text="'" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_dash" android:text="-" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_qof" android:text="𐤒" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_resh" android:text="𐤓" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_alef" android:text="𐤀" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_tet" android:text="𐤈" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_waw" android:text="𐤅" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_peh" android:text="𐤐" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
+        <Button android:id="@+id/key_apostrophe" style="@style/KeyboardKey" android:text="'" />
+        <Button android:id="@+id/key_dash" style="@style/KeyboardKey" android:text="-" />
+        <Button android:id="@+id/key_qof" style="@style/KeyboardKey" android:text="𐤒" />
+        <Button android:id="@+id/key_resh" style="@style/KeyboardKey" android:text="𐤓" />
+        <Button android:id="@+id/key_alef" style="@style/KeyboardKey" android:text="𐤀" />
+        <Button android:id="@+id/key_tet" style="@style/KeyboardKey" android:text="𐤈" />
+        <Button android:id="@+id/key_waw" style="@style/KeyboardKey" android:text="𐤅" />
+        <Button android:id="@+id/key_peh" style="@style/KeyboardKey" android:text="𐤐" />
+        <Button android:id="@+id/key_extra1" style="@style/KeyboardKey" android:text="9" android:visibility="gone" />
+        <Button android:id="@+id/key_extra2" style="@style/KeyboardKey" android:text="0" android:visibility="gone" />
     </LinearLayout>
 
     <!-- Row 2 -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/key_shin" android:text="𐤔" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_dalet" android:text="𐤃" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_gimel" android:text="𐤂" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_kaf" android:text="𐤊" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_ayin" android:text="𐤏" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_yod" android:text="𐤉" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_het" android:text="𐤇" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_lamed" android:text="𐤋" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
+        <Button android:id="@+id/key_shin" style="@style/KeyboardKey" android:text="𐤔" />
+        <Button android:id="@+id/key_dalet" style="@style/KeyboardKey" android:text="𐤃" />
+        <Button android:id="@+id/key_gimel" style="@style/KeyboardKey" android:text="𐤂" />
+        <Button android:id="@+id/key_kaf" style="@style/KeyboardKey" android:text="𐤊" />
+        <Button android:id="@+id/key_ayin" style="@style/KeyboardKey" android:text="𐤏" />
+        <Button android:id="@+id/key_yod" style="@style/KeyboardKey" android:text="𐤉" />
+        <Button android:id="@+id/key_het" style="@style/KeyboardKey" android:text="𐤇" />
+        <Button android:id="@+id/key_lamed" style="@style/KeyboardKey" android:text="𐤋" />
+        <Button android:id="@+id/key_extra3" style="@style/KeyboardKey" android:text="(" android:visibility="gone" />
+        <Button android:id="@+id/key_extra4" style="@style/KeyboardKey" android:text=")" android:visibility="gone" />
     </LinearLayout>
 
     <!-- Row 3 -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/key_zayin" android:text="𐤆" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_sameh" android:text="𐤎" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_bet" android:text="𐤁" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_he" android:text="𐤄" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_nun" android:text="𐤍" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_mem" android:text="𐤌" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_sadiq" android:text="𐤑" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_taf" android:text="𐤕" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_backspace" android:text="⌫" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
+        <Button android:id="@+id/key_zayin" style="@style/KeyboardKey" android:text="𐤆" />
+        <Button android:id="@+id/key_sameh" style="@style/KeyboardKey" android:text="𐤎" />
+        <Button android:id="@+id/key_bet" style="@style/KeyboardKey" android:text="𐤁" />
+        <Button android:id="@+id/key_he" style="@style/KeyboardKey" android:text="𐤄" />
+        <Button android:id="@+id/key_nun" style="@style/KeyboardKey" android:text="𐤍" />
+        <Button android:id="@+id/key_mem" style="@style/KeyboardKey" android:text="𐤌" />
+        <Button android:id="@+id/key_sadiq" style="@style/KeyboardKey" android:text="𐤑" />
+        <Button android:id="@+id/key_taf" style="@style/KeyboardKey" android:text="𐤕" />
+        <Button android:id="@+id/key_extra5" style="@style/KeyboardKey" android:text="/" android:visibility="gone" />
+        <Button
+            android:id="@+id/key_backspace"
+            style="@style/KeyboardKey.Function"
+            android:contentDescription="@string/key_delete"
+            android:text="⌫" />
     </LinearLayout>
 
     <!-- Row 4 (space + punctuation) -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/key_symbols" android:text="@string/symbols_key" android:layout_weight="1.5" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_comma" android:text="," android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_globe" android:text="🌐" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" android:visibility="gone" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_space" android:text="␣" android:layout_weight="4" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_dot" android:text="." android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
-        <Button android:id="@+id/key_enter" android:text="⏎" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" style="@style/KeyboardKey"/>
+        <Button
+            android:id="@+id/key_symbols"
+            style="@style/KeyboardKey.Function"
+            android:layout_weight="1.5"
+            android:contentDescription="@string/key_symbols"
+            android:text="@string/symbols_key" />
+        <Button android:id="@+id/key_comma" style="@style/KeyboardKey" android:text="," />
+        <Button
+            android:id="@+id/key_globe"
+            style="@style/KeyboardKey.Function"
+            android:contentDescription="@string/key_globe"
+            android:text="🌐"
+            android:visibility="gone" />
+        <Button
+            android:id="@+id/key_space"
+            style="@style/KeyboardKey"
+            android:layout_weight="4"
+            android:contentDescription="@string/key_word_divider"
+            android:text="𐤟" />
+        <Button android:id="@+id/key_dot" style="@style/KeyboardKey" android:text="." />
+        <Button
+            android:id="@+id/key_enter"
+            style="@style/KeyboardKey.Function"
+            android:layout_weight="1.5"
+            android:contentDescription="@string/key_enter"
+            android:text="⏎" />
     </LinearLayout>
 
 </LinearLayout>
