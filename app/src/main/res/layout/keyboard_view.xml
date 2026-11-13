@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Hebrew-style layout. PhoenicianKeyboardService swaps the labels for the symbols page,
+<!-- Hebrew-style layout. PaleoHebrewKeyboardService swaps the labels for the symbols page,
      which also shows the key_extra keys. Always left to right: a phone set to Hebrew
      would otherwise mirror every row. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

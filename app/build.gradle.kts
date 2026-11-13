@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.paleokeyboard"
+    namespace = "io.github.barvaziyel.paleokeyboard"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.paleokeyboard"
+        applicationId = "io.github.barvaziyel.paleokeyboard"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -21,13 +21,30 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // The release key never goes in the repo. Its location and passwords come from
+    // ~/.gradle/gradle.properties; without them, release builds come out unsigned.
+    val releaseStoreFile = providers.gradleProperty("paleoStoreFile").orNull
+    signingConfigs {
+        if (releaseStoreFile != null) {
+            create("release") {
+                storeFile = file(releaseStoreFile)
+                storePassword = providers.gradleProperty("paleoStorePassword").get()
+                keyAlias = providers.gradleProperty("paleoKeyAlias").get()
+                keyPassword = providers.gradleProperty("paleoKeyPassword").get()
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Strip unused code and resources: a much smaller download.
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.findByName("release")
         }
     }
     compileOptions {

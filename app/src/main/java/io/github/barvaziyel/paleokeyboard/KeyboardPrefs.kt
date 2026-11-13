@@ -1,10 +1,10 @@
-package com.example.paleokeyboard
+package io.github.barvaziyel.paleokeyboard
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-/** The Phoenician word divider, a small mark between words. */
+/** The Paleo-Hebrew word divider, a small mark between words. */
 const val WORD_DIVIDER = "𐤟"
 
 /** Settings shared by the setup screen and the keyboard. */

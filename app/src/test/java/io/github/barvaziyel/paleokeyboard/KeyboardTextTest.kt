@@ -1,4 +1,4 @@
-package com.example.paleokeyboard
+package io.github.barvaziyel.paleokeyboard
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -8,12 +8,12 @@ import org.junit.Test
 class KeyboardTextTest {
 
     @Test
-    fun `backspace removes a whole Phoenician letter`() {
+    fun `backspace removes a whole Paleo-Hebrew letter`() {
         assertEquals(2, charsToDelete("𐤀𐤁"))
     }
 
     @Test
-    fun `the word divider is the Phoenician word separator`() {
+    fun `the word divider is U+1091F`() {
         assertEquals(0x1091F, WORD_DIVIDER.codePointAt(0))
         assertEquals(2, WORD_DIVIDER.length)
     }
