@@ -13,6 +13,17 @@ class KeyboardTextTest {
     }
 
     @Test
+    fun `the word divider is the Phoenician word separator`() {
+        assertEquals(0x1091F, WORD_DIVIDER.codePointAt(0))
+        assertEquals(2, WORD_DIVIDER.length)
+    }
+
+    @Test
+    fun `backspace removes a whole word divider`() {
+        assertEquals(2, charsToDelete("𐤀𐤁$WORD_DIVIDER"))
+    }
+
+    @Test
     fun `backspace takes the invisible mark with the letter after it`() {
         // Text typed by the old version had a mark before every letter.
         assertEquals(3, charsToDelete("${RLM}𐤀${RLM}𐤁"))

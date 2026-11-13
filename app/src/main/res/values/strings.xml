@@ -6,6 +6,7 @@
     <string name="key_delete">Delete</string>
     <string name="key_enter">Enter</string>
     <string name="key_space">Space</string>
+    <string name="key_word_divider">Word divider</string>
     <string name="key_symbols">Symbols</string>
     <string name="key_letters">Letters</string>
     <string name="key_globe">Next keyboard</string>

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Hebrew-style layout. PhoenicianKeyboardService swaps the labels for the symbols page. -->
+<!-- Hebrew-style layout. PhoenicianKeyboardService swaps the labels for the symbols page,
+     which also shows the key_extra keys. Always left to right: a phone set to Hebrew
+     would otherwise mirror every row. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/keyboard_background"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
     android:paddingHorizontal="3dp"
     android:paddingTop="4dp">
@@ -22,6 +25,8 @@
         <Button android:id="@+id/key_tet" style="@style/KeyboardKey" android:text="𐤈" />
         <Button android:id="@+id/key_waw" style="@style/KeyboardKey" android:text="𐤅" />
         <Button android:id="@+id/key_peh" style="@style/KeyboardKey" android:text="𐤐" />
+        <Button android:id="@+id/key_extra1" style="@style/KeyboardKey" android:text="9" android:visibility="gone" />
+        <Button android:id="@+id/key_extra2" style="@style/KeyboardKey" android:text="0" android:visibility="gone" />
     </LinearLayout>
 
     <!-- Row 2 -->
@@ -38,6 +43,8 @@
         <Button android:id="@+id/key_yod" style="@style/KeyboardKey" android:text="𐤉" />
         <Button android:id="@+id/key_het" style="@style/KeyboardKey" android:text="𐤇" />
         <Button android:id="@+id/key_lamed" style="@style/KeyboardKey" android:text="𐤋" />
+        <Button android:id="@+id/key_extra3" style="@style/KeyboardKey" android:text="(" android:visibility="gone" />
+        <Button android:id="@+id/key_extra4" style="@style/KeyboardKey" android:text=")" android:visibility="gone" />
     </LinearLayout>
 
     <!-- Row 3 -->
@@ -54,6 +61,7 @@
         <Button android:id="@+id/key_mem" style="@style/KeyboardKey" android:text="𐤌" />
         <Button android:id="@+id/key_sadiq" style="@style/KeyboardKey" android:text="𐤑" />
         <Button android:id="@+id/key_taf" style="@style/KeyboardKey" android:text="𐤕" />
+        <Button android:id="@+id/key_extra5" style="@style/KeyboardKey" android:text="/" android:visibility="gone" />
         <Button
             android:id="@+id/key_backspace"
             style="@style/KeyboardKey.Function"
@@ -84,8 +92,8 @@
             android:id="@+id/key_space"
             style="@style/KeyboardKey"
             android:layout_weight="4"
-            android:contentDescription="@string/key_space"
-            android:text=" " />
+            android:contentDescription="@string/key_word_divider"
+            android:text="𐤟" />
         <Button android:id="@+id/key_dot" style="@style/KeyboardKey" android:text="." />
         <Button
             android:id="@+id/key_enter"

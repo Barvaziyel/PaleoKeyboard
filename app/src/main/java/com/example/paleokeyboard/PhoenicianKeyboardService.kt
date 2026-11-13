@@ -1,6 +1,7 @@
 package com.example.paleokeyboard
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.os.Build
@@ -62,42 +63,53 @@ class PhoenicianKeyboardService : InputMethodService() {
         R.id.key_taf to "𐤕",
 
         R.id.key_comma to ",",
-        R.id.key_space to " ",
         R.id.key_dot to "."
     )
 
+    // The key_extra keys only show on this page, so its first two rows have ten keys.
     private val symbolsMap = mapOf(
-        R.id.key_apostrophe to "!",
-        R.id.key_dash to "?",
-        R.id.key_qof to "@",
-        R.id.key_resh to "#",
-        R.id.key_alef to "$",
-        R.id.key_tet to "%",
-        R.id.key_waw to "^",
-        R.id.key_peh to "&",
+        R.id.key_apostrophe to "1",
+        R.id.key_dash to "2",
+        R.id.key_qof to "3",
+        R.id.key_resh to "4",
+        R.id.key_alef to "5",
+        R.id.key_tet to "6",
+        R.id.key_waw to "7",
+        R.id.key_peh to "8",
+        R.id.key_extra1 to "9",
+        R.id.key_extra2 to "0",
 
-        R.id.key_shin to "*",
-        R.id.key_dalet to "(",
-        R.id.key_gimel to ")",
-        R.id.key_kaf to "_",
-        R.id.key_ayin to "+",
-        R.id.key_yod to "=",
-        R.id.key_het to "/",
-        R.id.key_lamed to "\\",
+        R.id.key_shin to "@",
+        R.id.key_dalet to "#",
+        R.id.key_gimel to "$",
+        R.id.key_kaf to "%",
+        R.id.key_ayin to "&",
+        R.id.key_yod to "*",
+        R.id.key_het to "-",
+        R.id.key_lamed to "+",
+        R.id.key_extra3 to "(",
+        R.id.key_extra4 to ")",
 
-        R.id.key_zayin to "[",
-        R.id.key_sameh to "]",
-        R.id.key_bet to ":",
-        R.id.key_he to ";",
-        R.id.key_nun to "<",
-        R.id.key_mem to ">",
-        R.id.key_sadiq to "\"",
-        R.id.key_taf to "'",
+        R.id.key_zayin to "!",
+        R.id.key_sameh to "?",
+        R.id.key_bet to "\"",
+        R.id.key_he to "'",
+        R.id.key_nun to ":",
+        R.id.key_mem to ";",
+        R.id.key_sadiq to "_",
+        R.id.key_taf to "=",
+        R.id.key_extra5 to "/",
 
         R.id.key_comma to ",",
-        R.id.key_space to " ",
         R.id.key_dot to "."
     )
+
+    private val extraKeys = symbolsMap.keys - phoenicianMap.keys
+
+    private lateinit var prefs: SharedPreferences
+
+    // Held in a field: SharedPreferences only keeps a weak reference to its listeners.
+    private val prefsListener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ -> showLabels() }
 
     private val repeatDelete = object : Runnable {
         override fun run() {
@@ -119,6 +131,12 @@ class PhoenicianKeyboardService : InputMethodService() {
         false
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        prefs = KeyboardPrefs.of(this)
+        prefs.registerOnSharedPreferenceChangeListener(prefsListener)
+    }
+
     override fun onEvaluateFullscreenMode(): Boolean = false
 
     @SuppressLint("ClickableViewAccessibility", "InflateParams") // see buzzOnPress; IME views have no parent
@@ -126,11 +144,14 @@ class PhoenicianKeyboardService : InputMethodService() {
         val view = layoutInflater.inflate(R.layout.keyboard_view, null)
         keyboardView = view
 
-        for (id in phoenicianMap.keys) {
-            view.key(id).setOnClickListener { type(id) }
+        for (id in symbolsMap.keys) {
+            view.key(id).setOnClickListener { type(currentMap()[id] ?: return@setOnClickListener) }
         }
-        // A long press already buzzes on its own, so these listeners don't.
-        view.key(R.id.key_space).setOnLongClickListener { showKeyboardPicker(); true }
+        view.key(R.id.key_space).apply {
+            setOnClickListener { type(if (spaceIsDivider()) WORD_DIVIDER else " ") }
+            // A long press already buzzes on its own, so these listeners don't.
+            setOnLongClickListener { showKeyboardPicker(); true }
+        }
         view.key(R.id.key_symbols).setOnClickListener {
             isSymbols = !isSymbols
             showLabels()
@@ -140,7 +161,7 @@ class PhoenicianKeyboardService : InputMethodService() {
             setOnClickListener { switchKeyboard() }
             setOnLongClickListener { showKeyboardPicker(); true }
         }
-        for (id in phoenicianMap.keys + listOf(R.id.key_symbols, R.id.key_enter, R.id.key_globe)) {
+        for (id in symbolsMap.keys + listOf(R.id.key_space, R.id.key_symbols, R.id.key_enter, R.id.key_globe)) {
             view.key(id).setOnTouchListener(buzzOnPress)
         }
         setUpBackspace(view.key(R.id.key_backspace))
@@ -183,6 +204,7 @@ class PhoenicianKeyboardService : InputMethodService() {
 
     override fun onDestroy() {
         handler.removeCallbacksAndMessages(null)
+        prefs.unregisterOnSharedPreferenceChangeListener(prefsListener)
         super.onDestroy()
     }
 
@@ -196,20 +218,31 @@ class PhoenicianKeyboardService : InputMethodService() {
         view.key(R.id.key_globe).visibility = if (offerSwitching) View.VISIBLE else View.GONE
     }
 
+    private fun currentMap() = if (isSymbols) symbolsMap else phoenicianMap
+
+    private fun spaceIsDivider() = KeyboardPrefs.spaceIsDivider(this)
+
     private fun showLabels() {
         val view = keyboardView ?: return
-        for ((id, text) in if (isSymbols) symbolsMap else phoenicianMap) {
+        for ((id, text) in currentMap()) {
             view.key(id).text = text
+        }
+        for (id in extraKeys) {
+            view.key(id).visibility = if (isSymbols) View.VISIBLE else View.GONE
         }
         view.key(R.id.key_symbols).apply {
             text = if (isSymbols) "𐤀𐤁𐤂" else getString(R.string.symbols_key)
             contentDescription = getString(if (isSymbols) R.string.key_letters else R.string.key_symbols)
         }
+        val divider = spaceIsDivider()
+        view.key(R.id.key_space).apply {
+            text = if (divider) WORD_DIVIDER else ""
+            contentDescription = getString(if (divider) R.string.key_word_divider else R.string.key_space)
+        }
     }
 
-    private fun type(id: Int) {
+    private fun type(text: String) {
         val ic = currentInputConnection ?: return
-        val text = (if (isSymbols) symbolsMap else phoenicianMap).getValue(id)
         val markLine = !isSymbols && startsLine(ic.getTextBeforeCursor(1, 0))
         ic.commitText(if (markLine) "$RLM$text" else text, 1)
     }

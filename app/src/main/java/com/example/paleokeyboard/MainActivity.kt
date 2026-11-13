@@ -17,11 +17,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.example.paleokeyboard.ui.theme.PaleoKeyboardTheme
 
@@ -87,6 +90,8 @@ fun SetupScreen() {
                 context.getSystemService(InputMethodManager::class.java).showInputMethodPicker()
             }
 
+            SpaceBarSetting()
+
             OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
@@ -119,6 +124,30 @@ private fun Step(
         } else {
             Button(onClick = onAction, enabled = actionEnabled) { Text(action) }
         }
+    }
+}
+
+/** On: the space bar types the word divider. Off: a normal space. */
+@Composable
+private fun SpaceBarSetting() {
+    val context = LocalContext.current
+    var divider by remember { mutableStateOf(KeyboardPrefs.spaceIsDivider(context)) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.toggleable(value = divider, role = Role.Switch) {
+            divider = it
+            KeyboardPrefs.setSpaceIsDivider(context, it)
+        },
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text("Space bar types $WORD_DIVIDER", style = MaterialTheme.typography.titleMedium)
+            Text(
+                "The Phoenician word divider. Turn off for a normal space.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        Switch(checked = divider, onCheckedChange = null)
     }
 }
 
