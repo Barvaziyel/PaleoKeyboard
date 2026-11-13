@@ -23,14 +23,6 @@ Needs Android 8.0 or newer. Android already has a font for these letters, so the
 
 To build it yourself instead, open the project in Android Studio and press Run, or connect a phone and run `./gradlew installDebug`.
 
-## Releasing
-
-1. Raise `versionCode` and `versionName` in `app/build.gradle.kts`.
-2. Run `./gradlew assembleRelease`. It signs with the key named in your own `~/.gradle/gradle.properties` (`paleoStoreFile`, `paleoStorePassword`, `paleoKeyAlias`, `paleoKeyPassword`). Without those, the APK comes out unsigned.
-3. Copy `app/build/outputs/apk/release/app-release.apk` to `PaleoKeyboard-X.Y.apk` and run `gh release create vX.Y PaleoKeyboard-X.Y.apk`.
-
-Every update has to be signed with the same key, or phones refuse to install it over the old version. Keep a backup of the key file and its password somewhere other than this computer.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
